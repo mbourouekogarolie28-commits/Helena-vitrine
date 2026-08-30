@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Mannequin - À Propos & Contact</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Variables & Thème --- */
+        :root {
+            --bg-light: #fcfcfc;
+            --text-dark: #111111;
+            --accent-color: #666666;
+            --light-gray: #f4f4f4;
+            --border-color: #e5e5e5;
+            
+            --font-title: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+            
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* --- Réinitialisation --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Navigation (Fond Blanc) --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: rgba(252, 252, 252, 0.95);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            padding-bottom: 4px;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 1px;
+            background-color: var(--text-dark);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            font-weight: 600;
+        }
+
+        /* --- Main Content --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title h1 {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            letter-spacing: 4px;
+            font-weight: 400;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title p {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        /* --- Section Biographie & Agences --- */
+        .about-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .about-image {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(20%);
+        }
+
+        .about-text h2 {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .about-text p {
+            font-size: 0.9rem;
+            color: #444444;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .agency-list {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .agency-list h3 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .agency-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .agency-item span {
+            display: block;
+        }
+
+        .agency-city {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-color);
+        }
+
+        .agency-name {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* --- Section Formulaire de Contact --- */
+        .contact-section {
+            background-color: var(--light-gray);
+            padding: 2.5rem 1.5rem;
+            border-radius: 4px;
+        }
+
+        .contact-section h2 {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .contact-section p {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-group label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-light);
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--text-dark);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            padding: 1rem;
+            background-color: var(--text-dark);
+            color: var(--bg-light);
+            border: 1px solid var(--text-dark);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            margin-top: 0.5rem;
+        }
+
+        .btn-submit:hover {
+            background-color: transparent;
+            color: var(--text-dark);
+        }
+
+        /* --- Footer (Fond Blanc) --- */
+        footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-light);
+        }
+
+        /* --- Adaptabilité Ordinateurs & Tablettes --- */
+        @media (min-width: 768px) {
+            .navbar {
+                padding: 2rem 5rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                gap: 3rem;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+            }
+
+            .container {
+                padding: 4rem 2rem;
+            }
+
+            .page-title h1 {
+                font-size: 3rem;
+            }
+
+            .about-section {
+                flex-direction: row;
+                align-items: center;
+                gap: 4rem;
+            }
+
+            .about-image {
+                flex: 1;
+                max-width: 380px;
+            }
+
+            .about-text {
+                flex: 1.2;
+            }
+
+            .agency-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .contact-section {
+                padding: 3.5rem 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- En-tête / Navigation (Fond Blanc) -->
+    <header class="navbar">
+        <div class="logo">MATSANGUE MA MBADINGUE HELENA</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="./présentation.html">Présentation</a></li>
+                <li><a href="./galerie.html">Galerie</a></li>
+                <li><a href="./à propos.html" class="active">À Propos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contenu Principal -->
+    <main class="container">
+        
+        <div class="page-title">
+            <h1>À PROPOS</h1>
+            <p>Parcours & Booking</p>
+        </div>
+
+        <!-- Section Biographie et Présentation -->
+        <section class="about-section">
+            <div class="about-image">
+                <img src="./3.jpg" alt="Elena Rostova Portrait">
+            </div>
+            
+            <div class="about-text">
+                <h2>MATSANGUE MA MBADINGUE HELENA</h2>
+                <p>Passionnée par la mode et le mannequinat, je souhaite développer ma carrière au  Gabon et à terme, la faire évoluer à l'échelle internationale. Mon ambition est de collaborer avec des stylistes, des créateurs, des marques et des photographes de renoms. Grâce à ma détermination, ma polyvalence et ma passion pour la mode, je souhaite acquérir de l'expérience, participer à différents défilés et shootings et représenter fièrement le talent Gabonais dans l'univers de la mode.</p>
+                
+                <!-- Agences de représentation -->
+                <div class="agency-list">
+                    <h3>Représentation / Agences</h3>
+                    <div class="agency-grid">
+                        <div class="agency-item">
+                            <span class="agency-city">Libreville</span>
+                            <span class="agency-name">Elite Model Management</span>
+                        </div>
+                        <div class="agency-item">
+                            <span class="agency-city">Contact</span>
+                            <span class="agency-name">helenamatsangue4@gmail.com 065054431</span>
+                        </div>
+                        <div class="agency-item">
+                            <span class="agency-city">Bitam</span>
+                            <span class="agency-name">The Society Management</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Formulaire de Contact -->
+        <section class="contact-section">
+            <h2>CONTACT & BOOKING</h2>
+            <p>Pour toute demande de réservation ou de collaboration</p>
+            
+            <form class="contact-form" action="https://formspree.io/f/mzebdzry" method="POST">
+                <div class="form-group">
+                    <label for="name">Nom Complet</label>
+                    <input type="text" id="name" name="name" required placeholder="Votre nom ou société">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Adresse Email</label>
+                    <input type="email" id="email" name="email" required placeholder="exemple@domaine.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Sujet</label>
+                    <input type="text" id="subject" name="subject" required placeholder="Ex: Défilé, Shooting Édito...">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required placeholder="Détails du projet, dates, lieu..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn-submit">Envoyer le Message</button>
+            </form>
+        </section>
+
+    </main>
+
+    <!-- Pied de page (Fond Blanc) -->
+    <footer>
+        <p>&copy; 2026 MATSANGUE MA MBADINGUE HELENA. Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>
